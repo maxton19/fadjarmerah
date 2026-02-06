@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Kontak', href: '/contact' },
 ]
 
-const LOGO_URL = 'https://fadjarmerah.c2e64b56080214f58209b87ed1aa932d.r2.cloudflarestorage.com/fadjarasset/IMG_3192.JPG.jpeg'
+const LOGO_URL = 'https://media.dunianobi.com/IMG_3192.JPG.jpeg'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
