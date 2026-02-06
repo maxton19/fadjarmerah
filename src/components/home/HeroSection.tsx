@@ -1,8 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Users, Briefcase, TrendingUp, Sparkles } from 'lucide-react'
 import { COMPANY_INFO } from '@/lib/constants'
+
+const HERO_IMAGE_URL = 'https://media.dunianobi.com/pic.png'
 
 export default function HeroSection() {
   return (
@@ -85,16 +88,14 @@ export default function HeroSection() {
             <div className="relative group">
               {/* Main Card */}
               <div className="aspect-square bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/10 transform group-hover:scale-105 transition-all duration-500 group-hover:rotate-1">
-                <div className="w-full h-full bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                  {/* Animated Background with Red */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-red-500/20 via-blue-500/20 to-cyan-500/20 animate-pulse"></div>
-                  
-                  {/* Content */}
-                  <div className="text-center relative z-10">
-                    <Users size={120} className="mx-auto mb-4 text-red-400 animate-float" />
-                    <p className="text-2xl font-semibold">Profesional</p>
-                    <p className="text-gray-400">Outsourcing Solutions</p>
-                  </div>
+                <div className="w-full h-full rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={HERO_IMAGE_URL}
+                    alt="PT. Fadjar Merah Indonesia - Profesional Outsourcing Solutions"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </div>
               

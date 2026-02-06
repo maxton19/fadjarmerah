@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
+const LOGO_URL = 'https://media.dunianobi.com/IMG_3192.JPG.jpeg'
+
 const navLinks = [
   { name: 'Beranda', href: '/' },
   { name: 'Tentang Kami', href: '/about' },
@@ -12,8 +14,6 @@ const navLinks = [
   { name: 'Karir', href: '/careers' },
   { name: 'Kontak', href: '/contact' },
 ]
-
-const LOGO_URL = 'https://media.dunianobi.com/IMG_3192.JPG.jpeg'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -29,25 +29,25 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-xl' : 'bg-gradient-to-r from-slate-50 via-blue-50 to-cyan-50'}`}>
-      {/* Logo Section Above Navbar */}
-      <div className={`flex justify-center py-3 border-b border-slate-200/50 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3'}`}>
-        <Link href="/" className="group">
-          <Image
-            src={LOGO_URL}
-            alt="PT. Fadjar Merah Indonesia Logo"
-            width={120}
-            height={60}
-            className={`object-contain transition-all duration-300 group-hover:scale-105 ${isScrolled ? 'h-12 w-auto' : 'h-16 w-auto'}`}
-            priority
-          />
-        </Link>
-      </div>
-
       <nav className="container-custom">
-        <div className="flex justify-between items-center py-3">
-          <Link href="/" className="flex items-center gap-3 group lg:hidden">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-600 via-blue-700 to-cyan-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all group-hover:scale-110">
-              <span className="text-white font-bold text-lg">FM</span>
+        <div className="flex justify-between items-center py-4">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-14 h-14 rounded-xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all group-hover:scale-110">
+              <Image
+                src={LOGO_URL}
+                alt="PT. Fadjar Merah Indonesia Logo"
+                width={56}
+                height={56}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
+            <div className="hidden sm:block">
+              <div className="font-bold text-lg leading-tight">
+                <span className="bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">PT. Fadjar </span>
+                <span className="bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">Merah</span>
+                <span className="bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent"> Indonesia</span>
+              </div>
             </div>
           </Link>
 

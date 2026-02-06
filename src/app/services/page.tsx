@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import { Users, Search, BookOpen, Briefcase, Check, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { SERVICES } from '@/lib/constants'
@@ -13,6 +14,13 @@ const iconMap = {
   search: Search,
   book: BookOpen,
   briefcase: Briefcase,
+}
+
+const serviceImages: { [key: string]: string } = {
+  outsourcing: 'https://media.dunianobi.com/Outsourcing%20Karyawan.png',
+  recruitment: 'https://media.dunianobi.com/Recruitment%20Services.png',
+  training: 'https://media.dunianobi.com/Training%20%26%20Development.png',
+  consulting: 'https://media.dunianobi.com/HR%20Consulting.png',
 }
 
 export default function ServicesPage() {
@@ -59,8 +67,18 @@ export default function ServicesPage() {
                     </div>
                   </div>
                   <div className={!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                    <div className="aspect-square bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex items-center justify-center">
-                      <Icon className="text-secondary-800" size={120} />
+                    <div className="aspect-square bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl flex items-center justify-center overflow-hidden">
+                      {serviceImages[service.id] ? (
+                        <Image
+                          src={serviceImages[service.id]}
+                          alt={service.title}
+                          width={500}
+                          height={500}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <Icon className="text-secondary-800" size={120} />
+                      )}
                     </div>
                   </div>
                 </div>

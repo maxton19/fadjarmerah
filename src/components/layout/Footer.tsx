@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
 import { COMPANY_INFO } from '@/lib/constants'
+
+const LOGO_URL = 'https://media.dunianobi.com/IMG_3192.JPG.jpeg'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -16,8 +19,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-red-600 via-blue-700 to-cyan-600 rounded-lg flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">FM</span>
+              <div className="w-12 h-12 rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={LOGO_URL}
+                  alt="PT. Fadjar Merah Indonesia Logo"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <div className="font-bold text-xl">
