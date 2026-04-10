@@ -3,115 +3,136 @@ import Image from 'next/image'
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react'
 import { COMPANY_INFO } from '@/lib/constants'
 
-const LOGO_URL = 'https://media.dunianobi.com/IMG_3192.JPG.jpeg'
+const LOGO_URL = 'https://media.sawa.vision/IMG_3192.JPG.jpeg'
+
+const quickLinks = [
+  { name: 'Beranda', href: '/' },
+  { name: 'Tentang Kami', href: '/about' },
+  { name: 'Layanan', href: '/services' },
+  { name: 'Karir', href: '/careers' },
+  { name: 'Portal Berita', href: '/berita' },
+  { name: 'Kontak', href: '/contact' },
+]
+
+const newsCategories = [
+  { name: 'Outsourcing', href: '/berita?kategori=Outsourcing' },
+  { name: 'Ketenagakerjaan', href: '/berita?kategori=Ketenagakerjaan' },
+  { name: 'Rekrutmen', href: '/berita?kategori=Rekrutmen' },
+  { name: 'HR Management', href: '/berita?kategori=HR+Management' },
+  { name: 'Training & Development', href: '/berita?kategori=Training' },
+]
+
+const socials = [
+  { Icon: Facebook, href: COMPANY_INFO.social.facebook, label: 'Facebook' },
+  { Icon: Instagram, href: COMPANY_INFO.social.instagram, label: 'Instagram' },
+  { Icon: Linkedin, href: COMPANY_INFO.social.linkedin, label: 'LinkedIn' },
+  { Icon: Twitter, href: COMPANY_INFO.social.twitter, label: 'Twitter' },
+]
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
-  const phoneHref = 'tel:' + COMPANY_INFO.contact.phone
-  const emailHref = 'mailto:' + COMPANY_INFO.contact.email
 
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white relative overflow-hidden">
-      {/* Red accent decoration */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-red-500 to-blue-600"></div>
-      
-      <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src={LOGO_URL}
-                  alt="PT. Fadjar Merah Indonesia Logo"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-cover"
-                />
+    <footer className="bg-slate-950 text-white relative overflow-hidden">
+      {/* top accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-600/60 to-transparent" />
+      {/* subtle glow */}
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-red-600/6 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative container-custom pt-16 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14">
+
+          {/* Brand */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-11 h-11 rounded-xl overflow-hidden ring-1 ring-white/10 flex-shrink-0">
+                <Image src={LOGO_URL} alt="Logo" width={44} height={44} className="w-full h-full object-cover" />
               </div>
-              <div>
-                <div className="font-bold text-xl">
-                  <span className="text-white">PT. Fadjar </span>
-                  <span className="text-red-400">Merah</span>
-                  <span className="text-white"> Indonesia</span>
-                </div>
+              <div className="font-bold text-lg leading-tight">
+                PT. Fadjar <span className="text-red-500">Merah</span> Indonesia
               </div>
             </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              {COMPANY_INFO.tagline}
-            </p>
+            <p className="text-white/40 text-sm mb-6 leading-relaxed">{COMPANY_INFO.tagline}</p>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-red-400 flex-shrink-0 mt-1" />
-                <p className="text-gray-300 text-sm">{COMPANY_INFO.address.full}</p>
+                <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                <p className="text-white/40 text-xs leading-relaxed">{COMPANY_INFO.address.full}</p>
               </div>
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <a href={phoneHref} className="text-gray-300 hover:text-red-400 transition-colors text-sm">
+                <Phone className="w-4 h-4 text-red-500 flex-shrink-0" />
+                <a href={'tel:' + COMPANY_INFO.contact.phone} className="text-white/40 hover:text-red-400 transition-colors text-sm">
                   {COMPANY_INFO.contact.phone}
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-red-400 flex-shrink-0" />
-                <a href={emailHref} className="text-gray-300 hover:text-red-400 transition-colors text-sm">
+                <Mail className="w-4 h-4 text-red-500 flex-shrink-0" />
+                <a href={'mailto:' + COMPANY_INFO.contact.email} className="text-white/40 hover:text-red-400 transition-colors text-sm">
                   {COMPANY_INFO.contact.email}
                 </a>
               </div>
             </div>
           </div>
 
+          {/* Quick links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-red-400">Tautan Cepat</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-300 hover:text-red-400 transition-colors text-sm">Beranda</Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-gray-300 hover:text-red-400 transition-colors text-sm">Tentang Kami</Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-gray-300 hover:text-red-400 transition-colors text-sm">Layanan</Link>
-              </li>
-              <li>
-                <Link href="/careers" className="text-gray-300 hover:text-red-400 transition-colors text-sm">Karir</Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-300 hover:text-red-400 transition-colors text-sm">Kontak</Link>
-              </li>
+            <h3 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-5">Tautan Cepat</h3>
+            <ul className="space-y-3">
+              {quickLinks.map(({ name, href }) => (
+                <li key={name}>
+                  <Link href={href} className="text-white/40 hover:text-red-400 transition-colors text-sm">
+                    {name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Portal Berita */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-red-400">Layanan Kami</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-300 text-sm">Outsourcing Karyawan</li>
-              <li className="text-gray-300 text-sm">Recruitment Services</li>
-              <li className="text-gray-300 text-sm">Training & Development</li>
-              <li className="text-gray-300 text-sm">HR Consulting</li>
+            <h3 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-5">Portal Berita</h3>
+            <ul className="space-y-3">
+              {newsCategories.map(({ name, href }) => (
+                <li key={name}>
+                  <Link href={href} className="text-white/40 hover:text-red-400 transition-colors text-sm">
+                    {name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold mb-4 text-red-400">Ikuti Kami</h3>
-              <div className="flex gap-3">
-                <a href={COMPANY_INFO.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 hover:bg-gradient-to-r hover:from-red-600 hover:to-blue-600 rounded-full flex items-center justify-center transition-all">
-                  <Facebook size={20} />
+          </div>
+
+          {/* Services + Social */}
+          <div>
+            <h3 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-5">Layanan</h3>
+            <ul className="space-y-3 mb-8">
+              {['Outsourcing Karyawan', 'Recruitment Services', 'Training & Development', 'HR Consulting'].map((s) => (
+                <li key={s} className="text-white/35 text-sm">{s}</li>
+              ))}
+            </ul>
+
+            <h3 className="text-xs font-bold text-red-500 uppercase tracking-widest mb-4">Ikuti Kami</h3>
+            <div className="flex gap-2">
+              {socials.map(({ Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                  className="w-9 h-9 bg-white/5 hover:bg-red-600 border border-white/8 hover:border-red-600 rounded-lg flex items-center justify-center transition-all duration-200">
+                  <Icon size={15} />
                 </a>
-                <a href={COMPANY_INFO.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 hover:bg-gradient-to-r hover:from-red-600 hover:to-blue-600 rounded-full flex items-center justify-center transition-all">
-                  <Instagram size={20} />
-                </a>
-                <a href={COMPANY_INFO.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 hover:bg-gradient-to-r hover:from-red-600 hover:to-blue-600 rounded-full flex items-center justify-center transition-all">
-                  <Linkedin size={20} />
-                </a>
-                <a href={COMPANY_INFO.social.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 hover:bg-gradient-to-r hover:from-red-600 hover:to-blue-600 rounded-full flex items-center justify-center transition-all">
-                  <Twitter size={20} />
-                </a>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            © {currentYear} <span className="text-red-400 font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
+        {/* Bottom bar */}
+        <div className="border-t border-white/8 pt-7 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/25 text-xs text-center sm:text-left">
+            © {currentYear} <span className="text-red-500 font-semibold">{COMPANY_INFO.name}</span>. All rights reserved.
           </p>
+          <div className="flex gap-4 text-[11px] text-white/20">
+            <span>Privacy Policy</span>
+            <span>·</span>
+            <span>Terms of Service</span>
+          </div>
         </div>
       </div>
     </footer>

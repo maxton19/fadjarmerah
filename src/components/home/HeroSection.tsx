@@ -1,125 +1,188 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight, Users, Briefcase, TrendingUp, Sparkles } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, CheckCircle, Star, TrendingUp, Shield, Zap } from 'lucide-react'
 import { COMPANY_INFO } from '@/lib/constants'
 
-const HERO_IMAGE_URL = 'https://media.dunianobi.com/pic.png'
+const ease = [0.21, 0.47, 0.32, 0.98] as const
+
+const fadeUp = {
+  initial: { opacity: 0, y: 36 },
+  animate: (d: number) => ({ opacity: 1, y: 0, transition: { duration: 0.7, delay: d, ease } }),
+}
+
+const stats = [
+  { value: '500+', label: 'Klien Aktif',        color: 'text-red-400' },
+  { value: '5K+',  label: 'Karyawan',            color: 'text-orange-400' },
+  { value: '10+',  label: 'Tahun Pengalaman',    color: 'text-blue-400' },
+  { value: '98%',  label: 'Kepuasan Klien',      color: 'text-emerald-400' },
+]
+
+const industries = ['Manufaktur', 'Retail', 'FMCG', 'Logistik', 'Perbankan', 'Healthcare', 'Konstruksi']
+const checks     = ['Rekrutmen Profesional', 'Payroll Management', 'Training & Development', 'HR Consulting']
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
+    <section className="relative bg-slate-950 text-white overflow-hidden min-h-screen flex items-center">
 
-      {/* Animated Gradient Orbs with Red */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse animation-delay-400"></div>
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-float"></div>
+      {/* ── Background ── */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-red-950/50" />
+      <div className="absolute inset-0 opacity-[0.035]"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }} />
 
-      <div className="relative container-custom py-20 md:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="animate-slide-in-left">
-            {/* Badge with Red */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600/20 via-blue-600/20 to-cyan-600/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6 animate-bounce-slow border border-red-400/30">
-              <Sparkles size={16} className="text-red-400" />
-              <span>Solusi Outsourcing #1 di Indonesia</span>
-            </div>
+      {/* animated orbs */}
+      <motion.div className="absolute -top-32 right-0 w-[650px] h-[650px] bg-red-700/20 rounded-full blur-[130px] pointer-events-none"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.18, 0.28, 0.18] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }} />
+      <motion.div className="absolute bottom-0 -left-32 w-[500px] h-[500px] bg-blue-700/12 rounded-full blur-[100px] pointer-events-none"
+        animate={{ scale: [1, 1.18, 1], opacity: [0.12, 0.2, 0.12] }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 2 }} />
+      <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-red-500/6 rounded-full blur-3xl pointer-events-none"
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }} />
 
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6 leading-tight">
-              <span className="block animate-slide-in-left">Solusi Tenaga Kerja</span>
-              <span className="block bg-gradient-to-r from-red-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-slide-in-left animation-delay-200 bg-[length:200%_auto] animate-gradient">
-                Profesional & Terpercaya
+      {/* ── Content ── */}
+      <div className="relative container-custom py-28 md:py-36 w-full">
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+          {/* LEFT */}
+          <div>
+            {/* badge */}
+            <motion.div custom={0} variants={fadeUp} initial="initial" animate="animate" className="mb-7">
+              <span className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2 text-sm font-medium text-white/85">
+                <Star size={13} className="text-yellow-400 fill-yellow-400" />
+                Outsourcing &amp; HR Partner Terpercaya #1
               </span>
-            </h1>
+            </motion.div>
 
-            {/* Description */}
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-slide-in-left animation-delay-400">
-              {COMPANY_INFO.tagline}. Kami menyediakan layanan outsourcing, rekrutmen, dan HR consulting untuk berbagai industri di Indonesia.
-            </p>
-            
-            {/* CTA Buttons with Red */}
-            <div className="flex flex-wrap gap-4 mb-12 animate-slide-in-left animation-delay-600">
-              <Link href="/contact" className="group bg-gradient-to-r from-red-600 via-red-700 to-blue-700 hover:from-red-700 hover:via-red-800 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 inline-flex items-center gap-2">
+            {/* h1 */}
+            <motion.h1
+              custom={0.12} variants={fadeUp} initial="initial" animate="animate"
+              className="text-5xl sm:text-6xl lg:text-[4.25rem] font-bold leading-[1.04] tracking-tight mb-6"
+            >
+              Tenaga Kerja{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-300 to-red-500 animate-gradient bg-[length:200%_auto]">
+                Profesional
+              </span>
+              <br />untuk Bisnis Anda
+            </motion.h1>
+
+            {/* description */}
+            <motion.p custom={0.24} variants={fadeUp} initial="initial" animate="animate"
+              className="text-lg text-white/55 mb-9 leading-relaxed max-w-lg">
+              {COMPANY_INFO.tagline}. Lebih dari satu dekade mendampingi ratusan perusahaan Indonesia tumbuh dengan solusi SDM berkualitas tinggi.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div custom={0.36} variants={fadeUp} initial="initial" animate="animate"
+              className="flex flex-col sm:flex-row gap-3 mb-10">
+              <Link href="/contact"
+                className="group inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 shadow-2xl shadow-red-900/40 hover:shadow-red-900/60 hover:-translate-y-0.5 active:scale-[0.98]">
                 Konsultasi Gratis
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform animate-bounce-x" />
               </Link>
-              <Link href="/services" className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:shadow-xl">
+              <Link href="/services"
+                className="inline-flex items-center justify-center gap-2 bg-white/8 backdrop-blur-sm hover:bg-white/14 border border-white/18 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300">
                 Lihat Layanan
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Quick Stats with Red */}
-            <div className="grid grid-cols-3 gap-6 animate-slide-in-up animation-delay-800">
-              <div className="text-center lg:text-left group">
-                <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
-                  <Users className="text-red-400 group-hover:scale-110 transition-transform" size={24} />
+            {/* checklist */}
+            <motion.div custom={0.48} variants={fadeUp} initial="initial" animate="animate"
+              className="grid grid-cols-2 gap-2.5">
+              {checks.map((c) => (
+                <div key={c} className="flex items-center gap-2 text-sm text-white/55">
+                  <CheckCircle size={14} className="text-red-400 flex-shrink-0" />
+                  {c}
                 </div>
-                <div className="text-3xl font-bold font-display group-hover:text-red-400 transition-colors">500+</div>
-                <div className="text-gray-400 text-sm">Klien Aktif</div>
-              </div>
-              <div className="text-center lg:text-left group">
-                <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
-                  <Briefcase className="text-blue-400 group-hover:scale-110 transition-transform" size={24} />
-                </div>
-                <div className="text-3xl font-bold font-display group-hover:text-blue-400 transition-colors">5000+</div>
-                <div className="text-gray-400 text-sm">Karyawan</div>
-              </div>
-              <div className="text-center lg:text-left group">
-                <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
-                  <TrendingUp className="text-cyan-400 group-hover:scale-110 transition-transform" size={24} />
-                </div>
-                <div className="text-3xl font-bold font-display group-hover:text-cyan-400 transition-colors">10+</div>
-                <div className="text-gray-400 text-sm">Tahun</div>
-              </div>
-            </div>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Right Content - 3D Card with Red Accents */}
-          <div className="relative animate-slide-in-right animation-delay-200">
-            <div className="relative group">
-              {/* Main Card */}
-              <div className="aspect-square bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/10 transform group-hover:scale-105 transition-all duration-500 group-hover:rotate-1">
-                <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                  <Image
-                    src={HERO_IMAGE_URL}
-                    alt="PT. Fadjar Merah Indonesia - Profesional Outsourcing Solutions"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+          {/* RIGHT — stats card */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.85, delay: 0.25, ease }}
+          >
+            <div className="relative">
+              {/* glow ring behind card */}
+              <div className="absolute inset-0 rounded-3xl bg-red-600/8 blur-2xl scale-105" />
+
+              {/* main card */}
+              <div className="relative bg-white/6 backdrop-blur-2xl border border-white/10 rounded-3xl p-7 shadow-2xl">
+                {/* top row */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-xs font-semibold text-white/50 uppercase tracking-wider">Ringkasan Kinerja</span>
+                  <span className="flex items-center gap-1.5 text-xs text-white/40">
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                    Live
+                  </span>
+                </div>
+
+                {/* 2×2 stats */}
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {stats.map(({ value, label, color }) => (
+                    <div key={label} className="bg-white/5 rounded-2xl p-5 border border-white/8 hover:border-white/18 transition-colors group">
+                      <div className={`text-3xl font-black ${color} mb-1 leading-none group-hover:scale-105 transition-transform inline-block`}>
+                        {value}
+                      </div>
+                      <div className="text-[11px] text-white/45 font-medium mt-1">{label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* industries */}
+                <div className="border-t border-white/8 pt-5 mb-5">
+                  <div className="text-[10px] text-white/35 font-bold uppercase tracking-widest mb-3">Industri Dilayani</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {industries.map((ind) => (
+                      <span key={ind} className="text-xs bg-white/7 border border-white/10 text-white/60 px-2.5 py-1 rounded-full hover:bg-white/12 transition-colors">
+                        {ind}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* certifications */}
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { Icon: Shield, label: 'ISO 9001' },
+                    { Icon: TrendingUp, label: '100% Legal' },
+                    { Icon: Zap, label: 'A+ Rating' },
+                  ].map(({ Icon, label }) => (
+                    <div key={label} className="flex flex-col items-center gap-1.5 bg-white/4 rounded-xl p-3 border border-white/7">
+                      <Icon size={15} className="text-red-400" />
+                      <span className="text-[10px] text-white/45 font-medium">{label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              
-              {/* Floating Stats Cards with Red */}
-              <div className="absolute -top-6 -right-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-2xl animate-bounce-slow border-2 border-red-200">
-                <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">98%</div>
-                <div className="text-sm text-slate-600">Kepuasan Klien</div>
-              </div>
-              
-              <div className="absolute -bottom-6 -left-6 bg-white text-slate-900 px-6 py-4 rounded-xl shadow-2xl animate-bounce-slow animation-delay-400 border-2 border-blue-200">
-                <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">24/7</div>
-                <div className="text-sm text-slate-600">Support</div>
-              </div>
+
+              {/* floating badge */}
+              <motion.div
+                className="absolute -bottom-5 -right-4 bg-gradient-to-br from-red-600 to-red-700 text-white rounded-2xl px-5 py-3 shadow-2xl shadow-red-900/50 border border-red-500/30"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <div className="text-2xl font-black leading-none">98%</div>
+                <div className="text-xs text-red-200 mt-0.5">Kepuasan Klien</div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Wave Divider */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
-        </svg>
-      </div>
+      {/* scroll hint */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+        animate={{ opacity: [0.6, 0.2, 0.6] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      >
+        <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+        <span className="text-[10px] text-white/25 uppercase tracking-widest">Scroll</span>
+      </motion.div>
     </section>
   )
 }

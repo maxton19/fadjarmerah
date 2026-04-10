@@ -1,103 +1,114 @@
 'use client'
 
 import Link from 'next/link'
-import { Phone, Mail, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Phone, Mail, ArrowRight, MessageCircle, Clock } from 'lucide-react'
 import { COMPANY_INFO } from '@/lib/constants'
 import { generateWhatsAppLink } from '@/lib/utils'
+import AnimateOnScroll from '@/components/ui/AnimateOnScroll'
 
 export default function CTASection() {
-  const whatsappMessage = 'Halo, saya tertarik dengan layanan PT. Fadjar Merah Indonesia. Mohon informasi lebih lanjut.'
-  const whatsappLink = generateWhatsAppLink(COMPANY_INFO.contact.whatsapp, whatsappMessage)
-  const phoneHref = 'tel:' + COMPANY_INFO.contact.phone
-  const emailHref = 'mailto:' + COMPANY_INFO.contact.email
+  const whatsappLink = generateWhatsAppLink(
+    COMPANY_INFO.contact.whatsapp,
+    'Halo, saya tertarik dengan layanan PT. Fadjar Merah Indonesia. Mohon informasi lebih lanjut.'
+  )
 
   return (
-    <section className="section-padding bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container-custom">
-        <div className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 rounded-3xl overflow-hidden shadow-2xl border border-red-500/20">
-          {/* Red accent line */}
-          <div className="h-1 bg-gradient-to-r from-red-600 via-red-500 to-blue-600"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-0">
-            <div className="p-8 md:p-12 lg:p-16 text-white">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Siap <span className="text-red-400">Berkembang</span> Bersama Kami?
-              </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Konsultasikan kebutuhan SDM perusahaan Anda dengan tim profesional kami. Dapatkan solusi terbaik yang disesuaikan dengan bisnis Anda.
-              </p>
+    <section className="section-padding bg-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.03]"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '28px 28px' }} />
 
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm">✓</span>
-                  </div>
-                  <span className="text-gray-300">Konsultasi gratis tanpa biaya</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm">✓</span>
-                  </div>
-                  <span className="text-gray-300">Respons cepat dalam 24 jam</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-gradient-to-r from-red-600 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm">✓</span>
-                  </div>
-                  <span className="text-gray-300">Solusi disesuaikan kebutuhan</span>
-                </div>
-              </div>
+      <div className="relative container-custom">
+        <AnimateOnScroll direction="scale">
+          <div className="relative rounded-3xl overflow-hidden border border-white/8">
+            {/* top accent line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/60 to-transparent" />
 
-              <div className="flex flex-wrap gap-4">
-                <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-red-600 to-blue-600 hover:from-red-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg inline-flex items-center gap-2 transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1">
-                  <Phone size={20} />
-                  WhatsApp Kami
-                </a>
-                <Link href="/contact" className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold py-3 px-6 rounded-lg inline-flex items-center gap-2 transition-all duration-300">
-                  Form Kontak
-                  <ArrowRight size={20} />
-                </Link>
-              </div>
-            </div>
+            {/* animated bg */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-red-950/70" />
+            <motion.div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/12 rounded-full blur-3xl pointer-events-none"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.12, 0.2, 0.12] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }} />
 
-            <div className="bg-white p-8 md:p-12 lg:p-16 flex flex-col justify-center">
-              <h3 className="text-2xl font-bold mb-6">
-                <span className="text-slate-900">Atau Hubungi Kami </span>
-                <span className="text-red-600">Langsung</span>
-              </h3>
-
-              <div className="space-y-4">
-                <a href={phoneHref} className="card hover:border-2 hover:border-red-500 flex items-center gap-4 group">
-                  <div className="w-14 h-14 bg-red-50 group-hover:bg-gradient-to-r group-hover:from-red-600 group-hover:to-blue-600 rounded-xl flex items-center justify-center transition-all">
-                    <Phone className="text-red-600 group-hover:text-white transition-colors" size={24} />
-                  </div>
-                  <div>
-                    <div className="text-sm text-slate-600 mb-1">Telepon</div>
-                    <div className="font-semibold text-slate-900 group-hover:text-red-600 transition-colors">{COMPANY_INFO.contact.phone}</div>
-                  </div>
-                </a>
-
-                <a href={emailHref} className="card hover:border-2 hover:border-blue-500 flex items-center gap-4 group">
-                  <div className="w-14 h-14 bg-blue-50 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 rounded-xl flex items-center justify-center transition-all">
-                    <Mail className="text-blue-600 group-hover:text-white transition-colors" size={24} />
-                  </div>
-                  <div>
-                    <div className="text-sm text-slate-600 mb-1">Email</div>
-                    <div className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors break-all">{COMPANY_INFO.contact.email}</div>
-                  </div>
-                </a>
-              </div>
-
-              <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-blue-50 rounded-lg border border-red-200/50">
-                <p className="text-sm text-slate-700">
-                  <strong className="text-red-600">Jam Operasional:</strong><br />
-                  {COMPANY_INFO.businessHours.weekdays}<br />
-                  {COMPANY_INFO.businessHours.saturday}
+            <div className="relative grid lg:grid-cols-5">
+              {/* ── LEFT 3/5 ── */}
+              <div className="lg:col-span-3 p-8 md:p-12 lg:p-14 text-white">
+                <div className="text-xs font-bold uppercase tracking-widest text-red-400 mb-4">Mulai Sekarang</div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                  Siap <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">Berkembang</span> Bersama Kami?
+                </h2>
+                <p className="text-white/55 mb-8 leading-relaxed text-lg max-w-lg">
+                  Konsultasikan kebutuhan SDM perusahaan Anda secara gratis. Tim ahli kami siap merespons dalam 24 jam kerja.
                 </p>
+
+                <ul className="space-y-3 mb-9">
+                  {['Konsultasi gratis tanpa komitmen', 'Respons cepat dalam 24 jam', 'Solusi disesuaikan anggaran & kebutuhan'].map((t) => (
+                    <li key={t} className="flex items-center gap-3 text-sm text-white/65">
+                      <span className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0 text-[10px] font-black">✓</span>
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-3">
+                  <motion.a href={whatsappLink} target="_blank" rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-7 rounded-2xl transition-colors shadow-2xl shadow-red-900/40">
+                    <MessageCircle size={18} />
+                    WhatsApp Kami
+                  </motion.a>
+                  <Link href="/contact"
+                    className="inline-flex items-center gap-2 bg-white/8 hover:bg-white/14 border border-white/18 text-white font-semibold py-4 px-7 rounded-2xl transition-all">
+                    Form Kontak <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
+
+              {/* ── RIGHT 2/5 ── */}
+              <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-white/8 p-8 md:p-10 flex flex-col justify-center text-white">
+                <div className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-5">Hubungi Langsung</div>
+
+                <div className="space-y-3 mb-6">
+                  <motion.a href={'tel:' + COMPANY_INFO.contact.phone}
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-4 bg-white/5 hover:bg-white/9 border border-white/8 hover:border-red-500/30 rounded-2xl p-4 transition-all group"
+                  >
+                    <div className="w-10 h-10 bg-red-600/20 group-hover:bg-red-600 rounded-xl flex items-center justify-center transition-colors flex-shrink-0">
+                      <Phone size={17} className="text-red-400 group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-white/35 mb-0.5">Telepon</div>
+                      <div className="text-white font-semibold text-sm">{COMPANY_INFO.contact.phone}</div>
+                    </div>
+                  </motion.a>
+
+                  <motion.a href={'mailto:' + COMPANY_INFO.contact.email}
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-4 bg-white/5 hover:bg-white/9 border border-white/8 hover:border-blue-500/30 rounded-2xl p-4 transition-all group"
+                  >
+                    <div className="w-10 h-10 bg-blue-600/20 group-hover:bg-blue-600 rounded-xl flex items-center justify-center transition-colors flex-shrink-0">
+                      <Mail size={17} className="text-blue-400 group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-white/35 mb-0.5">Email</div>
+                      <div className="text-white font-semibold text-sm break-all">{COMPANY_INFO.contact.email}</div>
+                    </div>
+                  </motion.a>
+                </div>
+
+                <div className="bg-red-950/50 border border-red-800/25 rounded-xl p-4">
+                  <div className="flex items-center gap-2 text-red-400 text-xs font-semibold mb-2">
+                    <Clock size={12} /> Jam Operasional
+                  </div>
+                  <div className="text-white/45 text-xs space-y-0.5">
+                    <div>{COMPANY_INFO.businessHours.weekdays}</div>
+                    <div>{COMPANY_INFO.businessHours.saturday}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </AnimateOnScroll>
       </div>
     </section>
   )

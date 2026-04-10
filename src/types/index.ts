@@ -5,6 +5,8 @@ export interface Service {
   description: string
   icon: string
   features: string[]
+  image?: string
+  imagePosition?: string
 }
 
 export interface Stat {
