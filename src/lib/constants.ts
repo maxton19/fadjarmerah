@@ -14,7 +14,7 @@ export const COMPANY_INFO = {
   },
   contact: {
     phone: '+62 21 1234 5678',
-    whatsapp: '+62 812 3456 7890',
+    whatsapp: '+62 821 2238 4747',
     email: 'info@fadjarmerah.co.id',
   },
   social: {
