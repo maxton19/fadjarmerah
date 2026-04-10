@@ -5,7 +5,7 @@
 | Setting | Value |
 |---------|-------|
 | **Framework preset** | `None` |
-| **Build command** | `npm run build` |
+| **Build command** | `npm run build:cloudflare` |
 | **Build output directory** | `.open-next/assets` |
 | **Root directory** | `/` |
 
